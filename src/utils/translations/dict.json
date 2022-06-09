@@ -1,0 +1,130 @@
+{
+  "navbar": {
+    "title": {
+      "ru": "Умназия"
+    },
+    "links": [
+      {"key": "list", "text": {"ru": "Список"}},
+      {"key": "schedule", "text": {"ru": "Расписание"}}
+    ]
+  },
+  "list": {
+    "title": {
+      "ru": "Список"
+    },
+    "addStudent": {
+      "ru": "Добавить ученика"
+    },
+    "tabs": [
+      {"key": "students", "text": {"ru": "Ученики"}},
+      {"key": "teachers", "text": {"ru": "Учителя"}},
+      {"key": "groups", "text": {"ru": "Группы"}}
+    ],
+    "total": {
+      "ru": "Всего"
+    },
+    "active": {
+      "ru": "Активных"
+    },
+    "filters": {
+      "searchPlaceholder": {
+        "ru": "Поиск по таблице"
+      },
+      "clearFilters": {
+        "ru": "Очистить фильтры"
+      },
+      "filterButton": {
+        "ru": "Фильтры"
+      },
+      "inputs": {
+        "nameSearch": {
+          "label": {
+            "ru": "Поиск по имени"
+          },
+          "placeholder": {
+            "ru": "Начните вводить имя"
+          }
+        },
+        "langLavel": {
+          "label": {
+            "ru": "Уровень языка"
+          },
+          "placeholder": {
+            "ru": "Все"
+          }
+        },
+        "age": {
+          "label": {
+            "ru": "Возраст"
+          },
+          "placeholder": {
+            "ru": "Все"
+          }
+        },
+        "singleBalance": {
+          "label": {
+            "ru": "Баланс индив."
+          },
+          "placeholder": {
+            "ru": "Все"
+          }
+        },
+        "groupBalance": {
+          "label": {
+            "ru": "Баланс групп."
+          },
+          "placeholder": {
+            "ru": "Все"
+          }
+        },
+        "teacherSearch": {
+          "label": {
+            "ru": "Поиск преподавателя по имени"
+          },
+          "placeholder": {
+            "ru": "Начните вводить имя"
+          }
+        },
+        "group": {
+          "label": {
+            "ru": "Группа"
+          },
+          "placeholder": {
+            "ru": "Все"
+          }
+        },
+        "status": {
+          "label": {
+            "ru": "Статус"
+          },
+          "placeholder": {
+            "ru": "Все"
+          }
+        }
+      },
+      "applyFilters": {
+        "ru": "Применить фильтры"
+      }
+    },
+    "table": {
+      "students": {
+        "headers": {
+          "ru": [
+            "Ученик",
+            "Уровень",
+            "Возраст",
+            "Баланс<h5>Индив.</h5>",
+            "Баланс<h5>Групп.</h5>",
+            "Учитель",
+            "Группа",
+            "Статус"
+          ]
+        },
+        "start": "Старт",
+        "menuOptions": {
+          "ru": ["Просмотр", "В расписание", "Заморозить", "Включить", "<red>Удалить</red>"]
+        }
+      }
+    }
+  }
+}
