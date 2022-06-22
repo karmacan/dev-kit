@@ -7,5 +7,9 @@ export const styles = css`
     width: fit-content;
     font-family: 'Montserrat';
     cursor: pointer;
+
+    &.disabled {
+      pointer-events: none;
+    }
   }
 `;

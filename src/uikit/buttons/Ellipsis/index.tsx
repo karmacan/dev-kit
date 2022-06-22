@@ -1,9 +1,9 @@
 import React from 'react';
 import {styles} from './index.styles';
 import {EllipsisPropsType} from './index.types';
-import IconEllipsis from '@public/icons/icon-ellipsis';
-import {Options} from '@src/uikit/ui/Options';
-import {useElementOutsideClick} from '@src/utils/hooks/dom';
+import {IconEllipsis} from '~src/uikit/assets/svg/IconEllipsis';
+import {Options} from '~src/uikit/Options';
+import {useElementOutsideClick} from '~src/utils/hooks/dom';
 
 export const Ellipsis = ({className = '', style, options, orientation = 'right'}: EllipsisPropsType) => {
   const [isSelected, setIsSelected] = React.useState(false);

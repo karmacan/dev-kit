@@ -1,9 +1,9 @@
 import React from 'react';
 import {styles} from './index.styles';
 import {TabsPropsType} from './index.types';
-import {moveCaretToElement} from '@src/utils/helpers/dom';
-import {useComponentUpdate, useValueDidAssign} from '@src/utils/hooks/lifecycle';
-import {isNumber} from '@src/utils/helpers/script';
+import {moveCaretToElement} from '~src/utils/helpers/dom';
+import {useComponentUpdate, useValueDidAssign} from '~src/utils/hooks/lifecycle';
+import {isNumber} from '~src/utils/helpers/script';
 
 export const Tabs = ({className = '', style, options, activeOption, onSelect}: TabsPropsType) => {
   const [tabsElement, setTabsElement] = React.useState(null);

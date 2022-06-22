@@ -1,4 +1,4 @@
-import {OptionType} from '@src/utils/types';
+import {OptionType} from '~src/utils/types';
 
 export type SearchPropsType = {
   className?: string;

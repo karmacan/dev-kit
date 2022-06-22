@@ -1,14 +1,15 @@
 import React from 'react';
 import {styles} from './index.styles';
 import {DropdownPropsType} from './index.types';
-import {useElementOutsideClick} from '@src/utils/hooks/dom';
-import {Input} from '@src/uikit/inputs/Input';
-import IconAngle from '@public/icons/icon-angle';
-import {Options} from '@src/uikit/ui/Options';
+import {useElementOutsideClick} from '~src/utils/hooks/dom';
+import {Input} from '~src/uikit/inputs/Input';
+import {IconAngle} from '~src/uikit/assets/svg/IconAngle';
+import {Options} from '~src/uikit/Options';
 
 export const Dropdown = ({
   className = '',
   style,
+  disabled = false,
   label = '',
   placeholder = '',
   Icon = IconAngle,
@@ -27,11 +28,12 @@ export const Dropdown = ({
     <>
       <div
         ref={setDropdownElement}
-        className={`Dropdown ${className}`}
+        className={`Dropdown ${disabled ? 'disabled' : ''} ${className}`}
         style={style}
         onClick={() => setAreOptionsHidden(false)}
       >
         <Input
+          disabled={disabled}
           label={label}
           placeholder={placeholder}
           Icon={Icon}

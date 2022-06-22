@@ -1,4 +1,4 @@
-# Документация по Ui-uiKit
+# Документация по UiKit
 
 ## Руководство пользователю
 
@@ -16,7 +16,7 @@
 Кнопка с действием.
 
 Импорт:
-import {Button} from '@src/components/uikit/buttons/Button';
+import {Button} from '~src/components/uikit/buttons/Button';
 
 Пример:
 <Button
@@ -42,7 +42,7 @@ onClick?: (...args: any[]) => void;
 Кнопка с выпадающем списком.
 
 Импорт:
-import {Ellipsis} from '@src/components/uikit/buttons/Ellipsis';
+import {Ellipsis} from '~src/components/uikit/buttons/Ellipsis';
 
 Пример:
 <Ellipsis 
@@ -59,7 +59,7 @@ options?: OptionType[];
 Компонент переключения вкладок
 
 Импорт:
-import {Tabs} from '@src/components/uikit/buttons/Tabs';
+import {Tabs} from '~src/components/uikit/buttons/Tabs';
 
 Пример:
 <Tabs options={parseOptions(['Ученики', 'Учителя', 'Группы'])} />
@@ -76,7 +76,7 @@ onSelect?: (option?: OptionType, ...args: any[]) => void;
 Текст со стилем.
 
 Импорт:
-import {Tag} from '@src/components/uikit/buttons/Tag';
+import {Tag} from '~src/components/uikit/buttons/Tag';
 
 Примеры:
 Тег со значением
@@ -105,7 +105,7 @@ amount?: number; // for label
 Чекбокс.
 
 Импорт:
-import {Check} from '@src/components/uikit/inputs/Check';
+import {Check} from '~src/components/uikit/inputs/Check';
 
 Пример:
 <Check checked={true} onCheck={() => console.log('Checked!')} />
@@ -121,7 +121,7 @@ onCheck?: (...args: any[]) => void;
 Поле ввода текста.
 
 Импорт:
-import {Input} from '@src/components/uikit/inputs/Input';
+import {Input} from '~src/components/uikit/inputs/Input';
 
 Пример:
 const [text, setText] = React.useState('');
@@ -147,7 +147,7 @@ onChange?: (value?: string) => void;
 Ввод с выпадающем списком.
 
 Импорт:
-import {Dropdown} from '@src/components/uikit/inputs/Dropdown';
+import {Dropdown} from '~src/components/uikit/inputs/Dropdown';
 
 Пример:
 const [text, setText] = React.useState('');
@@ -175,7 +175,7 @@ onSelect?: (...args: any[]) => void;
 Поиск с выпадающим списком.
 
 Импорт:
-import {Search} from '@src/components/uikit/inputs/Search';
+import {Search} from '~src/components/uikit/inputs/Search';
 
 Пример:
 const [text, setText] = React.useState('');

@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    "@typescript-eslint",
+    "unused-imports"
+  ],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react/no-unescaped-entities": 0,
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "no-extra-semi": "warn",
+    "no-empty-pattern": "warn", // no empty object destructuring
+    "no-empty-function": "warn", // no empty callbacks
+    "@typescript-eslint/no-empty-function": "off", // no empty callbacks (ts double)
+    "@typescript-eslint/no-explicit-any": "off",
+    "@next/next/no-img-element": "off", // no use img tag
+    "jsx-a11y/alt-text": "off", // no empty img alt ptop
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": "warn"
+  }
+}

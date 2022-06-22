@@ -41,7 +41,25 @@ export const styles = css`
         }
         ::placeholder {
           color: var(--bland-color);
+          user-select: none;
         }
+      }
+    }
+    &.disabled {
+      pointer-events: none;
+      .label {
+        color: var(--light-bland-color);
+      }
+      .input {
+        border: 2px solid var(--light-bland-color);
+        input {
+          ::placeholder {
+            color: transparent;
+          }
+        }
+      }
+      .icon {
+        opacity: .3;
       }
     }
   }

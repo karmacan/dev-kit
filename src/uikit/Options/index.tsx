@@ -2,8 +2,8 @@ import React from 'react';
 import {styles} from './index.styles';
 import {OptionsPropsType} from './index.types';
 import {useOptionsSearch} from './index.hooks';
-import {HTML} from '@src/utils/components/html';
-import {MotionToggleHeight} from '@src/utils/components/motions';
+import {HTML} from '~src/utils/components/html';
+import {MotionToggleHeight} from '~src/utils/components/motions';
 
 const scrollMotionFix = (scrollable, options) => {
   const SCROLLABLE_START_LENGTH = 6;

@@ -2,7 +2,7 @@ import React from 'react';
 import {styles} from './index.styles';
 import {SearchPropsType} from './index.types';
 import {Dropdown} from '../Dropdown';
-import IconSearch from '@public/icons/icon-search';
+import {IconSearch} from '~src/uikit/assets/svg/IconSearch';
 
 export const Search = ({
   className = '',

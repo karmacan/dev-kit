@@ -1,8 +1,9 @@
-import {OptionType} from '@src/utils/types';
+import {OptionType} from '~src/utils/types';
 
 export type DropdownPropsType = {
   className?: string;
   style?: React.CSSProperties;
+  disabled?: boolean;
   label?: string;
   placeholder?: string;
   Icon?: React.FunctionComponent<any>;

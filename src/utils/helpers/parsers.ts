@@ -1,10 +1,12 @@
-import {isArray, isObject} from '@src/utils/helpers/script';
+import {isArray, isObject, isDate} from '~src/utils/helpers/script';
 
 export const parseOptions = from => {
-  if (!from || !isArray(from)) return;
+  if (!isArray(from)) return;
   return isObject(from[0])
-    ? from.map((item, idx) => ({idx, ...item})) // from array of objects
-    : from.map((text, idx) => ({idx, text})); // from array of strings
+    // From array of objects
+    ? from.map((item, idx) => ({idx, ...item}))
+    // From array of strings
+    : from.map((text, idx) => ({idx, text}));
 };
 
 export const markupMatchedText = match => {
@@ -12,5 +14,13 @@ export const markupMatchedText = match => {
   const {index: start, input: text} = match;
   const left = text.substring(0, start); // remove after matched
   const right = text.substring(text.indexOf(matched) + matched.length); // remove before matched
-  return `${left}<b>${matched}</b>${right}`;
+  return `${left}<b>${matched}</b>${right}`; // murkup matched text
 };
+
+export const toString = (from) => {
+  if (isDate(from)) {
+    return from.toISOString().split('T')[0]; // YYYY-MM-DD
+  } else {
+    return '' + from;
+  }
+}

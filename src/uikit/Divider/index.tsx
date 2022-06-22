@@ -1,12 +1,12 @@
 import React from 'react';
 
-export const Devider = ({className='', style}: any) => {
+export const Divider = ({className='', style}: any) => {
   return (
     <>
-      <div className={`Devider ${className}`} style={style} />
+      <div className={`Divider ${className}`} style={style} />
 
       <style jsx>{`
-        .Devider {
+        .Divider {
           height: 1px;
           width: 100%;
           background: var(--bland-color);

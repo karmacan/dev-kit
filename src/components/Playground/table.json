@@ -1,0 +1,62 @@
+[
+  {
+    "date": "10.01.1990",
+    "name": "Test 10",
+    "count": 1,
+    "length": "1"
+  },
+  {
+    "date": "10.01.1991",
+    "name": "Test 3",
+    "count": 2,
+    "length": "3"
+  },
+  {
+    "date": "10.01.1992",
+    "name": "Test 6",
+    "count": 2,
+    "length": "6"
+  },
+  {
+    "date": "10.01.1993",
+    "name": "Test 7",
+    "count": 3,
+    "length": "7"
+  },
+  {
+    "date": "10.01.1994",
+    "name": "Test 2",
+    "count": 1,
+    "length": "2"
+  },
+  {
+    "date": "10.01.1995",
+    "name": "Test 4",
+    "count": 2,
+    "length": "9"
+  },
+  {
+    "date": "10.01.1996",
+    "name": "Test 5",
+    "count": 1,
+    "length": "8"
+  },
+  {
+    "date": "10.01.1997",
+    "name": "Test 8",
+    "count": 3,
+    "length": "10"
+  },
+  {
+    "date": "10.01.1998",
+    "name": "Test 9",
+    "count": 2,
+    "length": "1"
+  },
+  {
+    "date": "10.01.1999",
+    "name": "Test 1",
+    "count": 1,
+    "length": "4"
+  }
+]

@@ -1,5 +1,5 @@
 import React from 'react';
-import {isArray, isObject, isEmpty} from '@src/utils/helpers/script';
+import {isArray, isObject, isEmpty} from '~src/utils/helpers/script';
 
 export const useComponentMount = callback => {
   React.useEffect(callback, []);

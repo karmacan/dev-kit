@@ -1,5 +1,5 @@
 import React from 'react';
-import {markupMatchedText} from '@src/utils/helpers/parsers';
+import {markupMatchedText} from '~src/utils/helpers/parsers';
 
 export const useOptionsSearch = (options, value) => {
   const [searchedOptions, setSearchedOptions] = React.useState(options);

@@ -5,6 +5,7 @@ import {InputPropsType} from './index.types';
 export const Input = ({
   className = '',
   style,
+  disabled = false,
   label = '',
   placeholder = '',
   // icon = <IconSearch /> // as Element
@@ -19,7 +20,7 @@ export const Input = ({
 
   return (
     <>
-      <div className={`Input ${className}`} style={style}>
+      <div className={`Input ${disabled ? 'disabled' : ''} ${className}`} style={style}>
         {label && <div className='label'>{label}</div>}
         <div className='input'>
           <input
@@ -29,7 +30,9 @@ export const Input = ({
             value={value}
             onChange={handleInputChange}
           />
-          <Icon doFlipY={doFlipIconY} />
+          <div className='icon'>
+            <Icon doFlipY={doFlipIconY} />
+          </div>
         </div>
       </div>
 
