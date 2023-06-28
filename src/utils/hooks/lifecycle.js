@@ -1,14 +1,15 @@
-import React from 'react';
-import {isArray, isObject, isEmpty} from '~src/utils/helpers/script';
+import { useRef, useState, useEffect } from 'react';
+import { isArray, isObject, isEmpty } from '~src/utils/helpers/script';
 
-export const useComponentMount = callback => {
-  React.useEffect(callback, []);
+export const useComponentMount = (callback) => {
+  useEffect(callback, []);
 };
 
 export const useComponentDidMount = callback => {
-  const [isMount, setIsMount] = React.useState(false);
-  const [wasExecuted, setWasExecuted] = React.useState(false);
-  React.useEffect(() => {
+  const [isMount, setIsMount] = useState(false);
+  const [wasExecuted, setWasExecuted] = useState(false);
+
+  useEffect(() => {
     if (!wasExecuted) {
       setTimeout(() => {
         setIsMount(true);
@@ -22,29 +23,29 @@ export const useComponentDidMount = callback => {
 };
 
 export const useComponentUpdate = callback => {
-  React.useEffect(callback);
+  useEffect(callback);
 };
 
 export const useComponentUnmount = callback => {
-  React.useEffect(() => {
+  useEffect(() => {
     return callback;
   }, []);
 };
 
 export const useValueUpdate = (callback, variable) => {
-  const [prev, setPrev] = React.useState(variable);
+  const [prev, setPrev] = useState(variable);
 
-  React.useEffect(() => {
+  useEffect(() => {
     callback(prev);
     setPrev(variable);
   }, [variable]);
 };
 
 export const useValueDidUpdate = (callback, variable) => {
-  const [isMount, setIsMount] = React.useState(true);
-  const [prev, setPrev] = React.useState(variable);
+  const [isMount, setIsMount] = useState(true);
+  const [prev, setPrev] = useState(variable);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMount) {
       setIsMount(false);
       setPrev(variable);
@@ -56,8 +57,9 @@ export const useValueDidUpdate = (callback, variable) => {
 };
 
 export const useValueDidAssign = (callback, variable) => {
-  const [hasValue, setHasValue] = React.useState(false);
-  React.useEffect(() => {
+  const [hasValue, setHasValue] = useState(false);
+
+  useEffect(() => {
     if (isArray(variable) && isEmpty(variable)) return;
     if (isObject(variable) && isEmpty(variable)) return;
     if (variable && !hasValue) {
@@ -65,4 +67,24 @@ export const useValueDidAssign = (callback, variable) => {
       setHasValue(true);
     }
   }, [variable]);
+};
+
+export const useComponentAfterMount = (callback, after = 1000) => {
+  const [isMounted, setIsMounted] = useState(false);
+  const wasExecutedRef = useRef(false);
+
+  useEffect(() => {
+    if (wasExecutedRef.current) {
+      return;
+    }
+
+    setTimeout(() => {
+      setIsMounted(true);
+    }, after);
+
+    if (isMounted) {
+      callback();
+      wasExecutedRef.current = true;
+    }
+  });
 };
