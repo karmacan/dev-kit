@@ -24,7 +24,7 @@ export const useDocument = () => {
   };
 };
 
-export const useDocumentMount = (callback) => {
+export const useDocumentMount = callback => {
   const isMountedRef = useRef(false);
 
   useEffect(() => {
@@ -84,13 +84,11 @@ export const useWindowScroll = (onScroll, {isSmooth = false, deps = []} /* optio
   };
 };
 
-export const useElementScrolledBottom = (el, onScrolledBottom, {triggerArea = 1} /* options */) => {
-  const isMountedRef = useRef(false);
-  const doScrollOnceRef = useRef(false);
+export const useElementScrolledBottom = (el, onScrolledBottom, /*options*/ {triggerArea = 1}) => {
+  const doInitScroll = useRef(true);
 
-  const handleElementScrolledDown = ev => {
-    const {target} = ev;
-    const diff = Math.abs(target.scrollTop + target.clientHeight - target.scrollHeight);
+  const handleElementScrolledDown = ({target: {scrollTop, clientHeight, scrollHeight}}) => {
+    const diff = Math.abs(scrollTop + clientHeight - scrollHeight);
     const isBottom = diff <= triggerArea; // px
     isBottom && onScrolledBottom && onScrolledBottom();
   };
@@ -98,34 +96,27 @@ export const useElementScrolledBottom = (el, onScrolledBottom, {triggerArea = 1}
   useEffect(() => {
     if (!el) return;
 
-    if (!isMountedRef.current) {
-      // If user scrolled before el ref was mapped
-      doScrollOnceRef.current = true;
-      isMountedRef.current = true;
-    }
-
-    if (doScrollOnceRef.current) {
+    if (doInitScroll.current) {
       handleElementScrolledDown({target: el});
-      doScrollOnceRef.current = false;
+      doInitScroll.current = false;
     }
 
     el.addEventListener('scroll', handleElementScrolledDown);
 
     return () => {
       el.removeEventListener('scroll', handleElementScrolledDown);
-      isMountedRef.current = false;
     };
   }, [el]);
 };
 
-export const useElementViewportIntersecting = (el /* trigger */, onIntersecting) => {
+export const useElementViewportIntersecting = (/*trigger*/ el, onIntersecting) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([event]) => {
         event.intersectionRatio > 0 && onIntersecting();
       },
       {
-        threshold: 1.0, // how much a target element is visible
+        threshold: 1, // how much a target element is visible (1 = 100%)
       }
     );
 
