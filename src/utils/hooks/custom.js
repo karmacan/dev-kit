@@ -85,20 +85,20 @@ export const useWindowScroll = (onScroll, {isSmooth = false, deps = []} /* optio
 };
 
 export const useElementScrolledBottom = (el, onScrolledBottom, /*options*/ {triggerArea = 1}) => {
-  const doInitScroll = useRef(true);
+  const isMountedRef = useRef(false);
 
   const handleElementScrolledDown = ({target: {scrollTop, clientHeight, scrollHeight}}) => {
     const diff = Math.abs(scrollTop + clientHeight - scrollHeight);
     const isBottom = diff <= triggerArea; // px
-    isBottom && onScrolledBottom && onScrolledBottom();
+    isBottom && onScrolledBottom();
   };
 
   useEffect(() => {
-    if (!el) return;
+    if (!el || !onScrolledBottom) return;
 
-    if (doInitScroll.current) {
+    if (!isMountedRef.current) {
       handleElementScrolledDown({target: el});
-      doInitScroll.current = false;
+      isMountedRef.current = true;
     }
 
     el.addEventListener('scroll', handleElementScrolledDown);
@@ -109,21 +109,31 @@ export const useElementScrolledBottom = (el, onScrolledBottom, /*options*/ {trig
   }, [el]);
 };
 
-export const useElementViewportIntersecting = (/*trigger*/ el, onIntersecting) => {
+export const useElementViewportIntersecting = (
+  /*trigger*/ el,
+  onIntersecting,
+  {triggerMargin = 0}
+) => {
   useEffect(() => {
+    if (!el || !onIntersecting) return;
+
     const observer = new IntersectionObserver(
-      ([event]) => {
-        event.intersectionRatio > 0 && onIntersecting();
+      ([entry], observer) => {
+        if (!entry.isIntersecting) return;
+
+        onIntersecting();
+
+        // observer.observe(newIntersectionElem);
       },
       {
-        threshold: 1, // how much a target element is visible (1 = 100%)
+        rootMargin: triggerMargin,
       }
     );
 
-    el && observer.observe(el);
+    observer.observe(el);
 
     return () => {
-      el && observer.unobserve(el);
+      observer.unobserve(el);
     };
   }, [el, onIntersecting]);
 };
