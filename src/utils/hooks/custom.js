@@ -112,7 +112,7 @@ export const useElementScrolledBottom = (el, onScrolledBottom, /*options*/ {trig
 export const useElementViewportIntersecting = (
   /*trigger*/ el,
   onIntersecting,
-  {triggerMargin = 0}
+  {triggerMargin = '0px'}
 ) => {
   useEffect(() => {
     if (!el || !onIntersecting) return;
