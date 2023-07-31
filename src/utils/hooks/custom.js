@@ -109,7 +109,7 @@ export const useElementScrolledBottom = (el, onScrolledBottom, /*options*/ {trig
   }, [el]);
 };
 
-export const useElementViewportIntersecting = (
+export const useElementIntersectingViewport = (
   /*trigger*/ el,
   onIntersecting,
   {triggerMargin = '0px'}
@@ -119,11 +119,11 @@ export const useElementViewportIntersecting = (
 
     const observer = new IntersectionObserver(
       ([entry], observer) => {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting) return; // continue only on el enter viewport
 
         onIntersecting();
 
-        observer.unobserve(el); // observe el intersection once
+        observer.unobserve(el); // unobserve observed el
       },
       {
         rootMargin: triggerMargin,
