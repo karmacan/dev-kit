@@ -55,7 +55,7 @@ export const useElementOutsideClick = (el, onOutsideClick) => {
   }, [el]);
 };
 
-export const useWindowScroll = (onScroll, {isSmooth = false, deps = []} /* options */) => {
+export const useWindowScroll = (onScroll, /*options*/ {isSmooth = false, deps = []}) => {
   const setWindowScrollY = (scrollY, scrollElem = document.body) => {
     if (!window) return;
 
@@ -123,17 +123,13 @@ export const useElementViewportIntersecting = (
 
         onIntersecting();
 
-        // observer.observe(newIntersectionElem);
+        observer.unobserve(el); // observe el intersection once
       },
       {
         rootMargin: triggerMargin,
       }
     );
 
-    observer.observe(el);
-
-    return () => {
-      observer.unobserve(el);
-    };
+    observer.observe(el); // set new each time useEffect get new el
   }, [el, onIntersecting]);
 };
