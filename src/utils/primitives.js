@@ -1,42 +1,36 @@
-export const isString = (variable) => {
-  return typeof variable === "string";
+export const isString = (varb) => {
+  return typeof varb === "string";
 };
 
-export const isNumber = (variable) => {
-  return typeof variable === "number";
+export const isNumber = (varb) => {
+  return typeof varb === "number";
 };
 
-export const isArray = (variable) => {
-  return Array.isArray(variable);
+export const isArray = (varb) => {
+  return Array.isArray(varb);
 };
 
-export const isObject = (variable) => {
+export const isObject = (varb) => {
   return (
-    typeof variable === "object" &&
-    !Array.isArray(variable) &&
-    variable !== null
+    typeof varb === "object" &&
+    !Array.isArray(varb) &&
+    varb !== null
   );
 };
 
 // / array + object
 
-export const isEmpty = (variable) => {
-  if (isArray(variable)) {
-    return !variable.length;
+export const isEmpty = (ref) => {
+  if (isArray(ref)) {
+    return !ref.length;
   }
-  if (isObject(variable)) {
-    return Object.is(variable, {});
-  }
-};
-
-export const addTo = (variable, value) => {
-  if (isArray(variable)) {
-    return [...variable, value];
+  if (isObject(ref)) {
+    return Object.is(ref, {});
   }
 };
 
-export const removeFrom = (variable, value) => {
-  if (isArray(variable)) {
-    return variable.filter((val) => val !== value);
-  }
-};
+export const addTo = (arr, val) => isArray(arr) && [...arr, val];
+
+export const deleteFrom = (arr, val) => isArray(arr) && arr.filter((v) => val !== v);
+
+export const uniq = (arr) => isArray(arr) && [...new Set(arr)];
