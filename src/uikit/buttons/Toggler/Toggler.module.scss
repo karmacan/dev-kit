@@ -1,0 +1,55 @@
+.toggler {
+  --card-padding-y: 10px;
+  --caret-margin: 4px;
+  --caret-shadow-bottom: 4px;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--caret-margin);
+  background: #f6f6f6;
+  border-radius: 12px;
+
+  &.vertical {
+    flex-direction: column;
+    .caret {
+      left: var(--caret-margin);
+      width: calc(100% - var(--caret-margin) * 2);
+    }
+    .card {
+      width: 100%;
+    }
+  }
+  
+  .card {
+    z-index: 10;
+    flex: /*grow*/ 1 /*srink*/ 1 /*basis*/ auto; /*fill space*/
+    text-align: center;
+    padding-top: var(--card-padding-y);
+    padding-bottom: var(--card-padding-y);
+    color: #999;
+    cursor: pointer;
+
+    transition: color .2s ease;
+
+    &.selected {
+      color: #333;
+    }
+  }
+
+  .caret {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    margin-top: var(--caret-margin);
+    margin-bottom: var(--caret-margin);
+    height: calc(100% - var(--caret-margin) - var(--caret-shadow-bottom));
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px var(--caret-shadow-bottom) 12px rgba(0, 0, 0, 0.08);
+
+    transition: left .2s ease-out, top .2s ease-out;
+  }
+}

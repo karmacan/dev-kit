@@ -11,7 +11,7 @@ export const parseOptions = (...from) => {
       from.map((text, i) => ({ i, text }));
 };
 
-export const numerifyPx = (px) => parseInt(px, 10);
+export const unpx = (px) => parseInt(px, 10);
 
 export const markupMatchedText = (match) => {
   const matched = match.shift();
