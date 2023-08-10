@@ -133,3 +133,47 @@ export const useElementIntersectingViewport = (
     observer.observe(el); // set new each time useEffect get new el
   }, [el, onIntersecting]);
 };
+
+import React, { useRef, useState, useEffect } from 'react';
+
+export const useWindowResize = (props = {}) => {
+  const { onResize, breakpoints = [] } = props;
+  const breakpoints_ = breakpoints.sort((a, b) => (a < b ? -1 : 1));
+
+  const prevWidthRef = useRef();
+  const [windowWidth, setWindowWidth] = useState();
+
+  const handleWindowResize = () => {
+    onResize && onResize(window.innerWidth);
+
+    if (!breakpoints_.length) {
+      // Update state on every change
+      setWindowWidth(window.innerWidth);
+    } else {
+      // Update state only on passing breakpoints
+      const breakpoint = breakpoints_.find(
+        (br) =>
+          (window.innerWidth <= br && br < prevWidthRef.current) ||
+          (prevWidthRef.current <= br && br < window.innerWidth)
+      );
+
+      if (prevWidthRef.current !== window.innerWidth)
+        prevWidthRef.current = window.innerWidth;
+
+      breakpoint && setWindowWidth(window.innerWidth);
+    }
+  };
+
+  useEffect(() => {
+    prevWidthRef.current = window.innerWidth;
+    setWindowWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  return {
+    width: windowWidth,
+  };
+};

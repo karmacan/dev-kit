@@ -12,22 +12,32 @@ export const moveCaretToElement = (
 ) => {
   if (!caretElem || !toElem) return;
 
+  const {
+    width,
+    paddingRight,
+    paddingLeft,
+    height,
+    paddingTop,
+    paddingBottom,
+  } = getComputedStyle(toElem);
+  const indent = getComputedStyle(caretElem).getPropertyValue('--indent');
+  const { borderWidth } = getComputedStyle(caretElem);
+
   if (orientation === 'horizontal') {
-    const left = `${toElem?.offsetLeft}px`;
-    const { width } = getComputedStyle(toElem);
-    caretElem!.style.left = left;
-    caretElem!.style.width = width;
+    caretElem!.style.left = toElem?.offsetLeft + 'px';
+    caretElem!.style.width =
+      unpx(width) + unpx(paddingRight) + unpx(paddingLeft) + 'px';
   }
 
   if (orientation === 'vertical') {
-    const margin =
-      getComputedStyle(caretElem).getPropertyValue('--caret-margin');
-    const top = `${toElem?.offsetTop - unpx(margin)}px`;
-    const { height, paddingTop, paddingBottom } = getComputedStyle(toElem);
-    caretElem!.style.top = top;
-    caretElem!.style.height = `${
-      unpx(height) + unpx(paddingTop) + unpx(paddingBottom)
-    }px`;
+    caretElem!.style.top = toElem?.offsetTop - unpx(indent) + 'px';
+    caretElem!.style.height =
+      unpx(height) + unpx(paddingTop) + unpx(paddingBottom) + 'px';
+
+    caretElem!.style.left =
+      toElem?.offsetLeft + unpx(indent) + unpx(borderWidth) * 2 + 'px';
+    caretElem!.style.width =
+      unpx(width) + 'px';
   }
 };
 
