@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 
 export const useWindow = () => {
   const windowRef = useRef(null);
@@ -112,14 +112,14 @@ export const useElementScrolledBottom = (el, onScrolledBottom, /*options*/ {trig
 export const useElementIntersectingViewport = (
   /*trigger*/ el,
   onIntersecting,
-  {triggerMargin = '0px'}
+  {triggerOnlyOnEntry = false, triggerMargin = '0px', threshold = 0}
 ) => {
   useEffect(() => {
     if (!el || !onIntersecting) return;
 
     const observer = new IntersectionObserver(
       ([entry], observer) => {
-        if (!entry.isIntersecting) return; // continue only on el enter viewport
+        if (triggerOnlyOnEntry && !entry.isIntersecting) return; // continue only on element enter viewport
 
         onIntersecting();
 
@@ -127,17 +127,16 @@ export const useElementIntersectingViewport = (
       },
       {
         rootMargin: triggerMargin,
+        threshold, // how much trigger element must be visible for trigger
       }
     );
 
-    observer.observe(el); // set new each time useEffect get new el
+    observer.observe(el); // set new each time useEffect get new element
   }, [el, onIntersecting]);
 };
 
-import React, { useRef, useState, useEffect } from 'react';
-
 export const useWindowResize = (props = {}) => {
-  const { onResize, breakpoints = [] } = props;
+  const {onResize, breakpoints = []} = props;
   const breakpoints_ = breakpoints.sort((a, b) => (a < b ? -1 : 1));
 
   const prevWidthRef = useRef();
@@ -152,13 +151,12 @@ export const useWindowResize = (props = {}) => {
     } else {
       // Update state only on passing breakpoints
       const breakpoint = breakpoints_.find(
-        (br) =>
+        br =>
           (window.innerWidth <= br && br < prevWidthRef.current) ||
           (prevWidthRef.current <= br && br < window.innerWidth)
       );
 
-      if (prevWidthRef.current !== window.innerWidth)
-        prevWidthRef.current = window.innerWidth;
+      if (prevWidthRef.current !== window.innerWidth) prevWidthRef.current = window.innerWidth;
 
       breakpoint && setWindowWidth(window.innerWidth);
     }
