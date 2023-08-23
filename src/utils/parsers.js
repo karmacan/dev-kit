@@ -1,5 +1,6 @@
 import { isArray, isObject, isString } from "./primitives";
 
+// TODO: rename to toIdObject
 export const parseOptions = (...from) => {
   if (isArray(from[0])) {
     [from] = from;
@@ -11,7 +12,7 @@ export const parseOptions = (...from) => {
       from.map((text, i) => ({ i, text }));
 };
 
-export const unpx = (px) => parseInt(px, 10);
+export const unpx = (px) => parseInt(px || 0, 10);
 
 export const markupMatchedText = (match) => {
   const matched = match.shift();
