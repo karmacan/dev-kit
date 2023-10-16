@@ -39,20 +39,22 @@ export const useDocumentMount = callback => {
   }, [document]);
 };
 
-export const useElementOutsideClick = (el, onOutsideClick) => {
+export const useElementOutsideClick = (target, onOutsideClick) => {
   const handleDocumentClick = ev => {
-    !el.contains(ev.target) && onOutsideClick && onOutsideClick(ev);
+    const targetElem = target?.current || target;
+
+    if (!targetElem) return;
+
+    !targetElem.contains(ev.target) && onOutsideClick?.(ev);
   };
 
   useEffect(() => {
-    if (!el) return;
-
     document.addEventListener('click', handleDocumentClick);
 
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
-  }, [el]);
+  }, [target, onOutsideClick]);
 };
 
 export const useWindowScroll = (onScroll, /*options*/ {isSmooth = false, deps = []}) => {
@@ -84,6 +86,30 @@ export const useWindowScroll = (onScroll, /*options*/ {isSmooth = false, deps = 
   };
 };
 
+export const useElementScroll = (target = document?.body, onScroll) => {
+  const setElementScrollY = scrollY => {
+    if (!target) return;
+
+    target.scrollTop = scrollY;
+  };
+
+  const handleScroll = ev => {
+    onScroll?.(Math.floor(ev.target.scrollTop));
+  };
+
+  useEffect(() => {
+    target?.addEventListener('scroll', handleScroll);
+
+    return () => {
+      target?.removeEventListener('scroll', handleScroll);
+    };
+  }, [target, onScroll]);
+
+  return {
+    setElementScrollY,
+  };
+};
+
 export const useElementScrolledBottom = (el, onScrolledBottom, /*options*/ {triggerArea = 1}) => {
   const isMountedRef = useRef(false);
 
@@ -109,30 +135,35 @@ export const useElementScrolledBottom = (el, onScrolledBottom, /*options*/ {trig
   }, [el]);
 };
 
-export const useElementIntersectingViewport = (
-  /*trigger*/ el,
-  onIntersecting,
-  {triggerOnlyOnEntry = false, triggerMargin = '0px', threshold = 0}
+export const useElementIntersection = (
+  target, // to update useEffect pass target ref if it has one
+  onIntersection,
+  options = {}
 ) => {
+  const {root = document?.body, triggerMargin = '0px', triggerThreshold = 0} = options;
+
   useEffect(() => {
-    if (!el || !onIntersecting) return;
+    const targetElem = target?.current || target;
+
+    if (!targetElem) return;
 
     const observer = new IntersectionObserver(
       ([entry], observer) => {
-        if (triggerOnlyOnEntry && !entry.isIntersecting) return; // continue only on element enter viewport
+        if (!entry.isIntersecting) return;
 
-        onIntersecting();
+        onIntersection?.(targetElem);
 
-        observer.unobserve(el); // unobserve observed el
+        observer.unobserve(targetElem); // unobserve observed target
       },
       {
+        root,
         rootMargin: triggerMargin,
-        threshold, // how much trigger element must be visible for trigger
+        threshold: triggerThreshold, // how much target must be visible for trigger
       }
     );
 
-    observer.observe(el); // set new each time useEffect get new element
-  }, [el, onIntersecting]);
+    observer.observe(targetElem); // set new each time useEffect get new target
+  }, [target, onIntersection, root, triggerMargin, triggerThreshold]);
 };
 
 export const useWindowResize = (props = {}) => {
